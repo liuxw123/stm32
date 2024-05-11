@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "user/logcat.h"
+#include "bsp/bsp_led.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define LOG_TAG "main"
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -53,7 +54,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static void Open_Led();
 /* USER CODE END 0 */
 
 /**
@@ -83,14 +83,15 @@ int main(void) {
 
     /* Initialize all configured peripherals */
     /* USER CODE BEGIN 2 */
-    Open_Led();
+    init_logcat();
+    init_bsp_led();
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while (1) {
         /* USER CODE END WHILE */
-
+        // ALOGD("Hello %d %c", 89, 'P');
         /* USER CODE BEGIN 3 */
     }
     /* USER CODE END 3 */
@@ -129,21 +130,6 @@ void SystemClock_Config(void) {
 }
 
 /* USER CODE BEGIN 4 */
-
-static void Open_Led() {
-    __HAL_RCC_GPIOA_CLK_ENABLE();
-
-    GPIO_InitTypeDef gpio = {
-        .Mode = GPIO_MODE_AF_OD,
-        .Pin = GPIO_PIN_8,
-        .Pull = GPIO_PULLUP,
-        .Speed = GPIO_SPEED_HIGH,
-    };
-
-    HAL_GPIO_Init(GPIOA, &gpio);
-
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
-}
 
 /* USER CODE END 4 */
 
