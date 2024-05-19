@@ -71,7 +71,8 @@ $(BASE_DIR)/hal.c \
 $(UTILS_DIR)/bsp_utils.c \
 $(BSP_DIR)/bsp_led.c \
 $(BSP_DIR)/bsp_uart.c \
-$(USER_DIR)/logcat.c 
+$(USER_DIR)/logcat.c \
+$(USER_DIR)/hc06.c
 
 # ASM sources
 ASM_SOURCES =  \
