@@ -24,6 +24,7 @@
 #include "user/logcat.h"
 #include "bsp/bsp_led.h"
 #include "user/ffile.h"
+#include "user/ili9341.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -87,6 +88,7 @@ int main(void) {
     init_logcat();
     init_bsp_led();
     init_ffile();
+    init_ili9341();
     /* USER CODE END 2 */
 
     /* Infinite loop */

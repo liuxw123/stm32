@@ -1,17 +1,21 @@
 {
-    // please setting to right mcu
-    "STM32_TARGET": "stm32f103zet6",
-    "files.associations": {
-        ".clang-format": "cpp",
-        "base.h": "c",
-        "stm32f103zet6.h": "c",
-        "bsp_led.h": "c",
-        "bsp_utils.h": "c",
-        "logcat.h": "c",
-        "bsp_usart.h": "c",
-        "bsp_uart.h": "c",
-        "fonts.h": "c"
-    },
-    // please specify right path for stm32-hal driver path
-    "STM32_DRIVER_PATH": "/home/lxw/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Drivers"
+        // please setting to right mcu
+        "STM32_TARGET": "stm32f103zet6",
+        "files.associations": {
+                ".clang-format": "cpp",
+                "base.h": "c",
+                "stm32f103zet6.h": "c",
+                "bsp_led.h": "c",
+                "bsp_utils.h": "c",
+                "logcat.h": "c",
+                "bsp_usart.h": "c",
+                "bsp_uart.h": "c",
+                "fonts.h": "c",
+                "compare": "c",
+                "ffile.h": "c",
+                "bsp_fsmc_lcd.h": "c",
+                "bsp_fsmc.h": "c"
+        },
+        // please specify right path for stm32-hal driver path
+        "STM32_DRIVER_PATH": "/home/lxw/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Drivers"
 }

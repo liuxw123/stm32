@@ -68,6 +68,8 @@ $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c \
+$(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.c \
+$(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
@@ -79,8 +81,10 @@ $(UTILS_DIR)/bsp_utils.c \
 $(BSP_DIR)/bsp_led.c \
 $(BSP_DIR)/bsp_uart.c \
 $(BSP_DIR)/bsp_sd.c \
+$(BSP_DIR)/bsp_fsmc.c \
 $(USER_DIR)/logcat.c \
 $(USER_DIR)/ffile.c \
+$(USER_DIR)/ili9341.c \
 $(THIRD_PARTY_DIR)/ff15/source/ff.c \
 $(THIRD_PARTY_DIR)/ff15/source/diskio.c \
 $(THIRD_PARTY_DIR)/ff15/source/ffsystem.c \
@@ -94,6 +98,7 @@ $(FONTS_DIR)/font16.c \
 $(FONTS_DIR)/font20.c \
 $(FONTS_DIR)/font24.c
 endif
+
 
 # ASM sources
 ASM_SOURCES =  \
