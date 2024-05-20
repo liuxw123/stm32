@@ -31,14 +31,4 @@
 #define GPIO_PIN(gpio_port) (gpio_port & 0x0000FFFF)
 
 
-/**
- * @brief key buttons gpio
- * 
- */
-#define KEY1_BUTTON_PIN __GPIO_PORT__(GPIO_BANK_E, GPIO_PIN2)
-#define KEY2_BUTTON_PIN __GPIO_PORT__(GPIO_BANK_E, GPIO_PIN3)
-#define KEY3_BUTTON_PIN __GPIO_PORT__(GPIO_BANK_E, GPIO_PIN4)
-#define KEY4_BUTTON_PIN __GPIO_PORT__(GPIO_BANK_E, GPIO_PIN5)
-
-
 #endif // STM32F103ZET6_H

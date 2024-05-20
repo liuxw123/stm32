@@ -4,43 +4,31 @@
 
 #define LOG_TAG "bsp_led"
 
-static void __bsp_led_set_state(uint32_t led, bsp_led_state_t state) {
-    HAL_GPIO_WritePin((GPIO_TypeDef*) hal_gpio_bank(led), hal_gpio_pin(led), state);
-}
-
-static bsp_led_state_t __bsp_led_get_state(uint32_t led) {
-    return HAL_GPIO_ReadPin((GPIO_TypeDef*) hal_gpio_bank(led), hal_gpio_pin(led));
-}
-
-static void __bsp_led_toggle(uint32_t led) {
-    return HAL_GPIO_TogglePin((GPIO_TypeDef*) hal_gpio_bank(led), hal_gpio_pin(led));
-}
-
 status_t bsp_led_on(uint32_t led_flag) {
     led_flag = led_flag & LED_FLAG_MASK;
-    if (led_flag & 0x00000001) __bsp_led_set_state(LED1_LIGHT_PIN, LED_STATE_ON);
-    if (led_flag & 0x00000002) __bsp_led_set_state(LED2_LIGHT_PIN, LED_STATE_ON);
-    if (led_flag & 0x00000004) __bsp_led_set_state(LED3_LIGHT_PIN, LED_STATE_ON);
-    if (led_flag & 0x00000008) __bsp_led_set_state(LED4_LIGHT_PIN, LED_STATE_ON);
+    if (led_flag & 0x00000001) hal_gpio_set_state(LED1_LIGHT_PIN, LED_STATE_ON);
+    if (led_flag & 0x00000002) hal_gpio_set_state(LED2_LIGHT_PIN, LED_STATE_ON);
+    if (led_flag & 0x00000004) hal_gpio_set_state(LED3_LIGHT_PIN, LED_STATE_ON);
+    if (led_flag & 0x00000008) hal_gpio_set_state(LED4_LIGHT_PIN, LED_STATE_ON);
 
     return NO_ERROR;
 }
 
 status_t bsp_led_off(uint32_t led_flag) {
     led_flag = led_flag & LED_FLAG_MASK;
-    if (led_flag & 0x00000001) __bsp_led_set_state(LED1_LIGHT_PIN, LED_STATE_OFF);
-    if (led_flag & 0x00000002) __bsp_led_set_state(LED2_LIGHT_PIN, LED_STATE_OFF);
-    if (led_flag & 0x00000004) __bsp_led_set_state(LED3_LIGHT_PIN, LED_STATE_OFF);
-    if (led_flag & 0x00000008) __bsp_led_set_state(LED4_LIGHT_PIN, LED_STATE_OFF);
+    if (led_flag & 0x00000001) hal_gpio_set_state(LED1_LIGHT_PIN, LED_STATE_OFF);
+    if (led_flag & 0x00000002) hal_gpio_set_state(LED2_LIGHT_PIN, LED_STATE_OFF);
+    if (led_flag & 0x00000004) hal_gpio_set_state(LED3_LIGHT_PIN, LED_STATE_OFF);
+    if (led_flag & 0x00000008) hal_gpio_set_state(LED4_LIGHT_PIN, LED_STATE_OFF);
     return NO_ERROR;
 }
 
 status_t bsp_led_toggle(uint32_t led_flag) {
     led_flag = led_flag & LED_FLAG_MASK;
-    if (led_flag & 0x00000001) __bsp_led_toggle(LED1_LIGHT_PIN);
-    if (led_flag & 0x00000002) __bsp_led_toggle(LED2_LIGHT_PIN);
-    if (led_flag & 0x00000004) __bsp_led_toggle(LED3_LIGHT_PIN);
-    if (led_flag & 0x00000008) __bsp_led_toggle(LED4_LIGHT_PIN);
+    if (led_flag & 0x00000001) hal_gpio_toggle_state(LED1_LIGHT_PIN);
+    if (led_flag & 0x00000002) hal_gpio_toggle_state(LED2_LIGHT_PIN);
+    if (led_flag & 0x00000004) hal_gpio_toggle_state(LED3_LIGHT_PIN);
+    if (led_flag & 0x00000008) hal_gpio_toggle_state(LED4_LIGHT_PIN);
 
     return NO_ERROR;
 }
@@ -48,10 +36,10 @@ status_t bsp_led_toggle(uint32_t led_flag) {
 uint32_t bsp_led_state(uint32_t led_flag) {
     uint32_t state = 0;
 
-    if ((led_flag & 0x00000001) && (__bsp_led_get_state(LED1_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000001;
-    if ((led_flag & 0x00000002) && (__bsp_led_get_state(LED2_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000002;
-    if ((led_flag & 0x00000004) && (__bsp_led_get_state(LED3_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000004;
-    if ((led_flag & 0x00000008) && (__bsp_led_get_state(LED4_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000008;
+    if ((led_flag & 0x00000001) && (hal_gpio_get_state(LED1_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000001;
+    if ((led_flag & 0x00000002) && (hal_gpio_get_state(LED2_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000002;
+    if ((led_flag & 0x00000004) && (hal_gpio_get_state(LED3_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000004;
+    if ((led_flag & 0x00000008) && (hal_gpio_get_state(LED4_LIGHT_PIN) == LED_STATE_ON)) state |= 0x00000008;
 
     return state;
 }

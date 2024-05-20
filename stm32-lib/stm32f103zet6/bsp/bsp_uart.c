@@ -142,14 +142,8 @@ status_t bsp_uart_send_with_recv(uint8_t* send, uint8_t* recv, bsp_handle_t uart
 
 
 static void __msp_uart_init(UART_HandleTypeDef* uart) {
-    uint32_t gpiox = 0;
-    uint32_t rx_pin, tx_pin;
-
     switch ((uint32_t) (uart->Instance)) {
     case USART1_BASE:
-        gpiox = hal_gpio_bank(UART1_RXD_PIN);
-        rx_pin = hal_gpio_pin(UART1_RXD_PIN);
-        tx_pin = hal_gpio_pin(UART1_TXD_PIN);
         __HAL_RCC_USART1_CLK_ENABLE();
         hal_gpio_init(UART1_RXD_PIN, GPIO_MODE_INPUT, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
         hal_gpio_init(UART1_TXD_PIN, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
@@ -161,9 +155,6 @@ static void __msp_uart_init(UART_HandleTypeDef* uart) {
         }
         break;
     case USART2_BASE:
-        gpiox = hal_gpio_bank(UART2_RXD_PIN);
-        rx_pin = hal_gpio_pin(UART2_RXD_PIN);
-        tx_pin = hal_gpio_pin(UART2_TXD_PIN);
         __HAL_RCC_USART2_CLK_ENABLE();
         hal_gpio_init(UART2_RXD_PIN, GPIO_MODE_INPUT, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
         hal_gpio_init(UART2_TXD_PIN, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_HIGH);
@@ -191,6 +182,11 @@ static void __msp_uart_deinit(UART_HandleTypeDef* uart) {
         __HAL_RCC_USART1_CLK_DISABLE();
         hal_gpio_deinit(UART1_RXD_PIN);
         hal_gpio_deinit(UART1_TXD_PIN);
+        if (sUartDevice->params_.enable_it_) {
+            HAL_NVIC_DisableIRQ(USART1_IRQn);
+            sUartDevice->handle_->RxCpltCallback = null;
+            sUartDevice->handle_->TxCpltCallback = null;
+        }
         break;
     case USART2_BASE:
         gpiox = hal_gpio_bank(UART2_RXD_PIN);
@@ -199,6 +195,11 @@ static void __msp_uart_deinit(UART_HandleTypeDef* uart) {
         __HAL_RCC_USART2_CLK_DISABLE();
         hal_gpio_deinit(UART2_RXD_PIN);
         hal_gpio_deinit(UART2_TXD_PIN);
+        if ((sUartDevice + 1)->params_.enable_it_) {
+            HAL_NVIC_DisableIRQ(USART2_IRQn);
+            (sUartDevice + 1)->handle_->RxCpltCallback = null;
+            (sUartDevice + 1)->handle_->TxCpltCallback = null;
+        }
         break;
     default:
         return;

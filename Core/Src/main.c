@@ -91,7 +91,7 @@ int main(void) {
     /* USER CODE BEGIN WHILE */
     while (1) {
         /* USER CODE END WHILE */
-        // ALOGD("Hello %d %c", 89, 'P');
+        bsp_led_on(0x8);
         /* USER CODE BEGIN 3 */
     }
     /* USER CODE END 3 */
