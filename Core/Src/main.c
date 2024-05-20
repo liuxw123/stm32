@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "user/logcat.h"
 #include "bsp/bsp_led.h"
+#include "bsp/bsp_key.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -85,6 +86,7 @@ int main(void) {
     /* USER CODE BEGIN 2 */
     init_logcat();
     init_bsp_led();
+    init_bsp_key();
     /* USER CODE END 2 */
 
     /* Infinite loop */
