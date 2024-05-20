@@ -24,6 +24,7 @@ DEBUG = 1
 # optimization
 OPT = -Og
 
+WRITE_SYS_FONTS = false
 
 #######################################
 # paths
@@ -38,6 +39,10 @@ BSP_DIR = $(TARGET_LIB_DIR)/bsp
 BASE_DIR = $(TARGET_LIB_DIR)/base
 UTILS_DIR = $(TARGET_LIB_DIR)/utils
 USER_DIR = $(TARGET_LIB_DIR)/user
+
+ifeq ($(WRITE_SYS_FONTS), true)
+FONTS_DIR = $(TARGET_LIB_DIR)/fonts
+endif
 
 # Third Party Path
 THIRD_PARTY_DIR = stm32-lib/third_party
@@ -61,6 +66,8 @@ $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c \
+$(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c \
+$(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
@@ -71,7 +78,22 @@ $(BASE_DIR)/hal.c \
 $(UTILS_DIR)/bsp_utils.c \
 $(BSP_DIR)/bsp_led.c \
 $(BSP_DIR)/bsp_uart.c \
-$(USER_DIR)/logcat.c 
+$(BSP_DIR)/bsp_sd.c \
+$(USER_DIR)/logcat.c \
+$(USER_DIR)/ffile.c \
+$(THIRD_PARTY_DIR)/ff15/source/ff.c \
+$(THIRD_PARTY_DIR)/ff15/source/diskio.c \
+$(THIRD_PARTY_DIR)/ff15/source/ffsystem.c \
+$(THIRD_PARTY_DIR)/ff15/source/ffunicode.c
+
+ifeq ($(WRITE_SYS_FONTS), true)
+C_SOURCES += \
+$(FONTS_DIR)/font8.c \
+$(FONTS_DIR)/font12.c \
+$(FONTS_DIR)/font16.c \
+$(FONTS_DIR)/font20.c \
+$(FONTS_DIR)/font24.c
+endif
 
 # ASM sources
 ASM_SOURCES =  \
@@ -125,6 +147,10 @@ C_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32F103xE
 
+ifeq ($(WRITE_SYS_FONTS), true)
+C_DEFS += \
+-DWRITE_SYS_FONTS
+endif
 
 # AS includes
 AS_INCLUDES = 
@@ -136,7 +162,8 @@ C_INCLUDES =  \
 -I$(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Inc/Legacy \
 -I$(DIRIVER_DIR)/CMSIS/Device/ST/STM32F1xx/Include \
 -I$(DIRIVER_DIR)/CMSIS/Include \
--I$(TARGET_LIB_DIR)/include
+-I$(TARGET_LIB_DIR)/include \
+-I$(THIRD_PARTY_DIR)
 
 
 # compile gcc flags

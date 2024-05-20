@@ -9,7 +9,8 @@
         "bsp_utils.h": "c",
         "logcat.h": "c",
         "bsp_usart.h": "c",
-        "bsp_uart.h": "c"
+        "bsp_uart.h": "c",
+        "fonts.h": "c"
     },
     // please specify right path for stm32-hal driver path
     "STM32_DRIVER_PATH": "/home/lxw/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.5/Drivers"
