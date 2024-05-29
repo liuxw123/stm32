@@ -61,6 +61,7 @@ $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c \
 $(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c \
+$(DIRIVER_DIR)/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c \
 Core/Src/main.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
@@ -71,7 +72,10 @@ $(BASE_DIR)/hal.c \
 $(UTILS_DIR)/bsp_utils.c \
 $(BSP_DIR)/bsp_led.c \
 $(BSP_DIR)/bsp_uart.c \
-$(USER_DIR)/logcat.c 
+$(BSP_DIR)/bsp_spi.c \
+$(USER_DIR)/logcat.c \
+$(USER_DIR)/w25q128.c
+
 
 # ASM sources
 ASM_SOURCES =  \
